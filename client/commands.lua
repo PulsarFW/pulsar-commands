@@ -1,11 +1,21 @@
-AddEventHandler('onClientResourceStart', function(resource)
-	if resource == GetCurrentResourceName() then
-		Wait(1000)
-		exports["pulsar-core"]:RegisterClientCallback("Commands:SS", function(d, cb)
-			TriggerServerEvent("Commands:Server:CaptureScreenshot", d, cb)
-		end)
-	end
+CreateThread(function()
+	plsr.Callbacks:RegisterClientCallback("Commands:SS", function(d, cb)
+		exports["screenshot-basic"]:requestScreenshotUpload(
+			string.format("https://discord.com/api/webhooks/%s", d),
+			"files[]",
+			function(data)
+				local image = json.decode(data)
+				cb(json.encode({ url = image.attachments[1].proxy_url }))
+			end
+		)
+	end)
 end)
+
+AddEventHandler("Proxy:Shared:RegisterReady", function()
+	exports["pulsar_core"]:RegisterComponent("Commands", CMDS)
+end)
+
+CMDS = {}
 
 RegisterNetEvent("Commands:Client:TeleportToMarker", function()
 	local WaypointHandle = GetFirstBlipInfoId(8)
@@ -23,8 +33,8 @@ RegisterNetEvent("Commands:Client:TeleportToMarker", function()
 
 			Wait(5)
 		end
-		exports["pulsar-hud"]:Notification("success", "Teleported")
+		plsr.Notification:Success("Teleported")
 	else
-		exports["pulsar-hud"]:Notification("error", "Please place your waypoint.")
+		plsr.Notification:Error("Please place your waypoint.")
 	end
 end)

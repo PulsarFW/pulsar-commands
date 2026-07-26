@@ -6,12 +6,18 @@
 
 # PULSAR-COMMANDS
 
-### General player and staff commands
+### General-purpose chat commands — teleport-to-waypoint, screenshot upload, and other utility commands that don't belong to a specific system
 
 <br/>
 
 ![Lua](https://img.shields.io/badge/Lua_5.4-2C2D72?style=flat-square&logo=lua&logoColor=white)
 ![FiveM](https://img.shields.io/badge/FiveM-F40552?style=flat-square)
+
+<br/>
+
+<sub>Enjoy the framework? A coffee helps keep active development, hardening, and support going.</sub>
+
+<a href="https://buymeacoffee.com/pulsarframework"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 50px !important;width: 180px !important;" /></a>
 
 <br/>
 
@@ -23,14 +29,15 @@
 
 ## Overview
 
-Shared command library for Pulsar Framework. Provides general-purpose player commands and role-gated staff commands used across the stack.
+Registers the `Commands` component (`plsr.Commands`) alongside a set of standalone chat commands and client events that don't fit under any other resource — teleport-to-waypoint, and screenshot capture/upload to Discord via `screenshot-basic`.
 
 ---
 
 ## Dependencies
 
-- `pulsar-core` — framework core, role access
-- `pulsar-characters` — character data for command context
+- `pulsar_core` — framework core
+- `pulsar_pwnzor` — anti-cheat check loaded alongside every resource
+- `screenshot-basic` — external resource, not part of Pulsar — handles the actual screenshot capture/upload
 
 ---
 
